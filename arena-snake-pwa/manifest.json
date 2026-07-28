@@ -1,0 +1,25 @@
+{
+  "name": "Arena Snake AI",
+  "short_name": "Arena Snake",
+  "description": "横屏触控的人机竞技贪吃蛇 PWA",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#050c16",
+  "theme_color": "#07111f",
+  "orientation": "landscape",
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
