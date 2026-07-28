@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+  <meta name="theme-color" content="#07111f">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Arena Snake">
+  <meta name="format-detection" content="telephone=no">
+  <title>Arena Snake AI</title>
+
+  <link rel="manifest" href="./manifest.json">
+  <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+  <link rel="icon" href="./icons/icon-192.png">
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <div id="rotateTip" class="rotate-tip">
+    <div class="rotate-card">
+      <div class="rotate-icon">↻</div>
+      <strong>请横屏游戏</strong>
+      <span>旋转 iPhone 后体验更好</span>
+    </div>
+  </div>
+
+  <main id="app" class="app">
+    <section id="homeScreen" class="screen home-screen active">
+      <div class="home-panel">
+        <div class="brand">
+          <div class="logo-orb">🐍</div>
+          <div>
+            <p class="eyebrow">PWA · HUMAN VS AI</p>
+            <h1>ARENA SNAKE</h1>
+            <p class="subtitle">1 名玩家 · 3 条 AI · 能量争夺竞技</p>
+          </div>
+        </div>
+
+        <div class="home-grid">
+          <div class="preview-card">
+            <canvas id="previewCanvas" width="760" height="380"></canvas>
+          </div>
+
+          <div class="menu-card">
+            <div class="menu-row">
+              <span>AI 难度</span>
+              <div class="segmented" id="difficultyGroup">
+                <button data-value="休闲">休闲</button>
+                <button class="selected" data-value="标准">标准</button>
+                <button data-value="挑战">挑战</button>
+              </div>
+            </div>
+
+            <div class="menu-row">
+              <span>蛇身颜色</span>
+              <div class="skin-row" id="skinGroup">
+                <button class="skin selected" data-color="#38E184" style="--skin:#38E184"></button>
+                <button class="skin" data-color="#55B6FF" style="--skin:#55B6FF"></button>
+                <button class="skin" data-color="#C084FC" style="--skin:#C084FC"></button>
+                <button class="skin" data-color="#FF8D6B" style="--skin:#FF8D6B"></button>
+              </div>
+            </div>
+
+            <div class="best-home">
+              <span>历史最长</span>
+              <strong id="homeBest">6</strong>
+            </div>
+
+            <button id="startBtn" class="primary-btn">开始人机竞技</button>
+            <p class="hint">手机：在竞技场滑动控制方向 · 电脑：方向键 / WASD</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="gameScreen" class="screen game-screen">
+      <header class="hud">
+        <div class="metric">
+          <span>LENGTH</span>
+          <strong id="lengthValue">6</strong>
+        </div>
+        <div class="metric">
+          <span>RANK</span>
+          <strong id="rankValue">1/4</strong>
+        </div>
+        <div class="metric">
+          <span>BEST</span>
+          <strong id="bestValue">6</strong>
+        </div>
+
+        <div class="hud-spacer"></div>
+
+        <button id="leaderboardBtn" class="icon-btn" aria-label="排行榜">☷</button>
+        <button id="pauseBtn" class="icon-btn" aria-label="暂停">Ⅱ</button>
+      </header>
+
+      <div class="game-layout">
+        <section class="arena-shell">
+          <canvas id="gameCanvas"></canvas>
+
+          <div id="countdown" class="center-overlay hidden">
+            <div id="countdownText" class="countdown-text">3</div>
+          </div>
+
+          <div id="pauseOverlay" class="center-overlay hidden">
+            <div class="dialog-card compact">
+              <span class="dialog-tag">PAUSED</span>
+              <h2>游戏暂停</h2>
+              <button id="resumeBtn" class="primary-btn small">继续</button>
+            </div>
+          </div>
+
+          <div id="gameOverOverlay" class="center-overlay hidden">
+            <div class="dialog-card">
+              <span class="dialog-tag danger">GAME OVER</span>
+              <h2>本局结束</h2>
+              <div class="result-grid">
+                <div><span>长度</span><strong id="finalLength">6</strong></div>
+                <div><span>排名</span><strong id="finalRank">4/4</strong></div>
+                <div><span>最佳</span><strong id="finalBest">6</strong></div>
+              </div>
+              <button id="againBtn" class="primary-btn small">再来一局</button>
+              <button id="homeBtnFromOver" class="ghost-btn">返回主页</button>
+            </div>
+          </div>
+
+          <div class="touch-guide">
+            <span>↕ ↔ 滑动控制</span>
+          </div>
+        </section>
+
+        <aside id="leaderboardPanel" class="leaderboard-panel">
+          <div class="panel-title">
+            <div>
+              <span>LIVE</span>
+              <strong>排行榜</strong>
+            </div>
+            <button id="closeLeaderboardBtn" class="mini-close">×</button>
+          </div>
+          <div id="leaderboardList" class="leaderboard-list"></div>
+
+          <div class="panel-actions">
+            <button id="restartBtn" class="ghost-btn">重新开始</button>
+            <button id="homeBtn" class="ghost-btn">返回主页</button>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <script src="./game.js"></script>
+</body>
+</html>
